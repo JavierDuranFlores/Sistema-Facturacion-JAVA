@@ -10,38 +10,33 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import modelo.Conexion;
-import modelo.entidades.Usuario;
 
 /**
  *
  * @author javier
  */
-public class VerificarLogin {
-    
+public class EliminarCliente {
     private final Conexion CON;
     private PreparedStatement ps;
     private ResultSet rs;
     
-    public VerificarLogin() {
+    public EliminarCliente() {
         CON = Conexion.getInstacia();
     }
     
-    public ResultSet sql(Usuario usuario) {
-        
+    public void eliminar(int id) {
         try {
+            ps = CON.conectar().prepareStatement("SELECT eliminar_cliente(?);");
+            ps.setInt(1, id);
+            ps.execute();
             
-            ps = CON.conectar().prepareStatement("SELECT autenticacion (?, ?);");
+            JOptionPane.showMessageDialog(null, "CLIENTE ELIMINADO");
             
-            ps.setString(1, usuario.getUsuario());
-            ps.setString(2, usuario.getPassword());
-            rs = ps.executeQuery();
-            
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "CLIENTE NO ELIMINADO", "ERROR", 0);
+            ex.printStackTrace();
+        } finally {
+            CON.desconectar();
         }
-        return rs;
-        
     }
-    
-    
 }

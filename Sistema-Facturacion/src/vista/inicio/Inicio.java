@@ -5,6 +5,7 @@
  */
 package vista.inicio;
 
+import controlador.ControladorInicio;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,6 +16,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -32,26 +34,32 @@ public class Inicio {
                   consultas,
                   reportes,
                   herramientas,
-                  salir;
+                  salir,
+                  facturaConsultas;
     
     private JMenuItem clienteMantenimiento,
                       productoMantenimiento,
                       facturaMantenimiento,
                       clienteConsultas,
                       productoConsultas,
-                      facturaConsultas,
                       reporte,
                       calculadora,
                       cambiarContra,
                       salirItem;
     
+    private JMenuItem facturaFecha,
+                      facturaID;
+    
     private JPanel contenedor;
     
     private final Color colorComponente = new Color(241, 242, 246);
     
+    private ControladorInicio controladorInicio;
+    
     public void iniciarComponentes() {
         ventana();
         panel();
+        inicializarControlador();
         barraMenu();
         contenedor();
         menuMantenimiento();
@@ -73,6 +81,10 @@ public class Inicio {
     private void panel() {
         panelIncio = new JPanel(new BorderLayout());
         ventanaInicio.add(panelIncio);
+    }
+    
+    private void inicializarControlador() {
+        controladorInicio = new ControladorInicio(this);
     }
 
     private void barraMenu() {
@@ -105,6 +117,8 @@ public class Inicio {
         mantenimiento.add(facturaMantenimiento);
         
         barraMenu.add(mantenimiento);
+        
+        clienteMantenimiento.addActionListener(controladorInicio);
     }
     
     private void menuConsultas() {
@@ -117,8 +131,15 @@ public class Inicio {
         productoConsultas = new JMenuItem("PRODUCTOS");
         productoConsultas.setIcon(new ImageIcon("src//img//productos.png"));
         
-        facturaConsultas = new JMenuItem("FACTURAS");
+        facturaConsultas = new JMenu("FACTURAS");
         facturaConsultas.setIcon(new ImageIcon("src//img//factura.png"));
+        facturaFecha = new JMenuItem("FECHA");
+        facturaFecha.setIcon(new ImageIcon("src//img//fecha.png"));
+        facturaID = new JMenuItem("ID Cliente");
+        facturaID.setIcon(new ImageIcon("src//img//id.png"));
+        
+        facturaConsultas.add(facturaFecha);
+        facturaConsultas.add(facturaID);
          
         consultas.add(clienteConsultas);
         consultas.add(productoConsultas);
@@ -165,6 +186,50 @@ public class Inicio {
         salir.add(salirItem);
         
         barraMenu.add(salir);
+        
+    }
+    
+    public void addContenedor(JPanel panel) {
+        
+        contenedor.add(panel, BorderLayout.CENTER);
+        SwingUtilities.updateComponentTreeUI(ventanaInicio);
+        
+    }
+    
+    public JMenuItem getClienteConsultas() {
+        return clienteConsultas;
+    }
+
+    public JMenuItem getFacturaConsultas() {
+        return facturaConsultas;
+    }
+
+    public JMenuItem getClienteMantenimiento() {
+        return clienteMantenimiento;
+    }
+
+    public JMenuItem getFacturaMantenimiento() {
+        return facturaMantenimiento;
+    }
+
+    public JMenuItem getReporte() {
+        return reporte;
+    }
+
+    public JMenuItem getCalculadora() {
+        return calculadora;
+    }
+
+    public JMenuItem getCambiarContra() {
+        return cambiarContra;
+    }
+
+    public JMenuItem getSalirItem() {
+        return this.salirItem;
+    }
+
+    public JFrame getVentanaInicio() {
+        return ventanaInicio;
     }
     
 }

@@ -6,7 +6,6 @@
 package modelo.dao;
 
 import java.sql.ResultSet;
-import modelo.Conexion;
 import modelo.interfaces.LoginInterface;
 import modelo.query.VerificarLogin;
 import modelo.entidades.Usuario;
