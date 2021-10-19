@@ -5,7 +5,7 @@
  */
 package vista.crud.cliente.menu.listado.pie_pagina;
 
-import controlador.mantenimientocliente.ControladorMantenimientoCliente;
+import controlador.mantenimiento.ControladorMantenimientoCliente;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -14,7 +14,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import modelo.dao.ClienteDAO;
-import vista.crud.cliente.VentanaMantenimientoCliente;
+import vista.crud.cliente.PrincipalMantenimientoCliente;
 
 /**
  *
@@ -103,9 +103,9 @@ public class PiePaginaListadoCliente extends JPanel {
         Object paginas[];
         int cont=0;
         if (getComboPaginas().getSelectedItem() == null){
-            paginas = clienteDAO.getLeer().paginas(10);
+            paginas = clienteDAO.getLeer().paginas(10, "clientes");
         }else {
-            paginas = clienteDAO.getLeer().paginas(Integer.valueOf(getComboNRegistros().getSelectedItem().toString()));
+            paginas = clienteDAO.getLeer().paginas(Integer.valueOf(getComboNRegistros().getSelectedItem().toString()), "clientes");
             cont = getComboPaginas().getItemCount();
         }
 
@@ -121,6 +121,4 @@ public class PiePaginaListadoCliente extends JPanel {
         return etiquetaContador;
     }
     
-    
-
 }

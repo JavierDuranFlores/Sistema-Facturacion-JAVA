@@ -6,8 +6,9 @@
 package vista.crud.cliente.menu.listado.encabezado;
 
 import controlador.ControladorLogin;
-import controlador.mantenimientocliente.ControladorMantenimientoCliente;
+import controlador.mantenimiento.ControladorMantenimientoCliente;
 import java.awt.FlowLayout;
+import java.util.stream.Stream;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -24,32 +25,21 @@ public class HeaderListadoCliente extends JPanel{
     
     private ControladorMantenimientoCliente controladorMantenimiento;
     
-    private final JLabel nombre = new JLabel("Nombre");
     private Object arregloTipoBusqueda [] = {"id_cliente","nombre", "apellidop", "apellidom", "edad", "email", "direccion", "telefono", "fecha"};
     private JComboBox tipoBusqueda = new JComboBox(arregloTipoBusqueda);
     public JTextField campo = new JTextField(15);
     public final JButton buscar = new JButton("Buscar");
     
-    public final ContenidoTablaCliente contenidoTablaCliente;
     
-    public HeaderListadoCliente() {
-        this.contenidoTablaCliente = new ContenidoTablaCliente();
+    public HeaderListadoCliente(Object clase) {
         setLayout(new FlowLayout());
         add(tipoBusqueda);
         add(campo);
         add(buscar);
         
-        //inicializarControlado();
-        
         buscar.addActionListener(controladorMantenimiento);
-        //System.out.println("Clase header: "+this.contenidoTablaCliente);
     }
     
-   /* private void inicializarControlado() {
-        controladorMantenimiento = new ControladorMantenimientoCliente(this);
-        System.out.println("Controlador Matenimiento desde Header" + controladorMantenimiento.headerListadoCliente.contenidoTablaCliente);
-    }*/
-
     public JTextField getCampo() {
         return campo;
     }

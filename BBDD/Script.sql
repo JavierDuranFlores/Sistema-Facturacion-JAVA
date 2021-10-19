@@ -17,11 +17,11 @@ CREATE TABLE pregunta_recuperacion (
     id SMALLSERIAL,
     pregunta CHARACTER VARYING (40) NOT NULL,
 
-    CONSTRAINT pk_pregunta_recuperacion_id 
+    CONSTRAINT pk_pregunta_recuperacion_id
         PRIMARY KEY (id)
 );
 
-INSERT INTO pregunta_recuperacion (id, pregunta) 
+INSERT INTO pregunta_recuperacion (id, pregunta)
 VALUES (DEFAULT, '¿Nombre de tu primer mascota?'),
        (DEFAULT, '¿Nombre de tu primer novia?'),
        (DEFAULT, '¿Nombre de tu padre?');
@@ -51,16 +51,16 @@ CREATE TABLE respuesta_recuperacion (
     id_usuario SMALLINT,
     id_pregunta SMALLINT,
 
-    CONSTRAINT pk_respuesta_recuperacion_id     
+    CONSTRAINT pk_respuesta_recuperacion_id
         PRIMARY KEY (id),
 
     CONSTRAINT fk_respuesta_recuperacion_usuarios_id_usuario
-        FOREIGN KEY (id_usuario) 
+        FOREIGN KEY (id_usuario)
             REFERENCES usuarios (id)
                 ON UPDATE CASCADE ON DELETE CASCADE,
 
     CONSTRAINT fk_respuesta_recuperacion_pregunta_recuperacion_id_pregunta
-        FOREIGN KEY (id_pregunta) 
+        FOREIGN KEY (id_pregunta)
             REFERENCES pregunta_recuperacion (id)
                 ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -88,7 +88,7 @@ CREATE TABLE facturas (
     n_productos SMALLINT NOT NULL,
     total NUMERIC (12, 2) NOT NULL,
     id_cliente SMALLINT NOT NULL,
-    create_at DATE NOT NULL,
+    create_at DATE DEFAULT NOW(),
 
     CONSTRAINT pk_facturas_id_factura PRIMARY KEY (id_factura),
     CONSTRAINT fk_facturas_id_cliente_clientes_id_cliente FOREIGN KEY (id_cliente)
@@ -100,18 +100,19 @@ CREATE TABLE productos (
     nombre CHARACTER VARYING (60) NOT NULL,
     precio NUMERIC(12, 2) NOT NULL,
     stock INT NOT NULL,
-    create_at DATE NOT NULL,
+    create_at DATE DEFAULT NOW(),
 
     CONSTRAINT pk_productos_id_producto PRIMARY KEY(id_producto)
 );
 
+
 CREATE TABLE facturas_items (
-    id_factura_item SMALLSERIAL,
+    consecutivo SMALLSERIAL,
     cantidad INT NOT NULL,
     id_factura SMALLINT,
     id_producto SMALLINT,
 
-    CONSTRAINT pk_facturas_items_id PRIMARY KEY (id_factura_item),
+    CONSTRAINT pk_consecutivo_id PRIMARY KEY (consecutivo, id_factura),
 
     CONSTRAINT fk_facturas_items_factura_id_facturas_id_factura FOREIGN KEY (id_factura)
         REFERENCES facturas (id_factura) ON UPDATE CASCADE ON DELETE CASCADE,
@@ -144,8 +145,8 @@ INSERT INTO clientes (nombre, apellidoP, apellidoM, email, create_at) VALUES('Ri
 INSERT INTO clientes (nombre, apellidoP, apellidoM, email, create_at) VALUES('Janie', 'Doe', 'Fernandez','janie.doe@gmail.com', '2017-08-16');
 INSERT INTO clientes (nombre, apellidoP, apellidoM, email, create_at) VALUES('Phillip', 'Webb', 'Browne','phillip.webb@gmail.com', '2017-08-17');
 INSERT INTO clientes (nombre, apellidoP, apellidoM, email, create_at) VALUES('Stephane', 'Nicoll', 'Charles', 'stephane.nicoll@gmail.com', '2017-08-18');
-INSERT INTO clientes (nombre, apellidoP, apellidoM, email, create_at) VALUES('Sam', 'Brannen', 'John', 'sam.brannen@gmail.com', '2017-08-19');  
-INSERT INTO clientes (nombre, apellidoP, apellidoM, email, create_at) VALUES('Juergen', 'Hoeller', 'juergen.Hoeller@gmail.com', '2017-08-20'); 
+INSERT INTO clientes (nombre, apellidoP, apellidoM, email, create_at) VALUES('Sam', 'Brannen', 'John', 'sam.brannen@gmail.com', '2017-08-19');
+INSERT INTO clientes (nombre, apellidoP, apellidoM, email, create_at) VALUES('Juergen', 'Hoeller', 'juergen.Hoeller@gmail.com', '2017-08-20');
 INSERT INTO clientes (nombre, apellidoP, apellidoM, email, create_at) VALUES('Janie', 'Roe', 'Clarke', 'janie.roe@gmail.com', '2017-08-21');
 INSERT INTO clientes (nombre, apellidoP, apellidoM, email, create_at) VALUES('John', 'Smith', 'Scarlet', 'john.smith@gmail.com', '2017-08-22');
 INSERT INTO clientes (nombre, apellidoP, apellidoM, email, create_at) VALUES('Joe', 'Bloggs', 'Crockett','joe.bloggs@gmail.com', '2017-08-23');
@@ -191,8 +192,8 @@ INSERT INTO clientes (nombre, apellido, email, create_at, foto) VALUES('Richard'
 INSERT INTO clientes (nombre, apellido, email, create_at, foto) VALUES('Janie', 'Doe', 'janie.doe@gmail.com', '2017-08-16', '');
 INSERT INTO clientes (nombre, apellido, email, create_at, foto) VALUES('Phillip', 'Webb', 'phillip.webb@gmail.com', '2017-08-17', '');
 INSERT INTO clientes (nombre, apellido, email, create_at, foto) VALUES('Stephane', 'Nicoll', 'stephane.nicoll@gmail.com', '2017-08-18', '');
-INSERT INTO clientes (nombre, apellido, email, create_at, foto) VALUES('Sam', 'Brannen', 'sam.brannen@gmail.com', '2017-08-19', '');  
-INSERT INTO clientes (nombre, apellido, email, create_at, foto) VALUES('Juergen', 'Hoeller', 'juergen.Hoeller@gmail.com', '2017-08-20', ''); 
+INSERT INTO clientes (nombre, apellido, email, create_at, foto) VALUES('Sam', 'Brannen', 'sam.brannen@gmail.com', '2017-08-19', '');
+INSERT INTO clientes (nombre, apellido, email, create_at, foto) VALUES('Juergen', 'Hoeller', 'juergen.Hoeller@gmail.com', '2017-08-20', '');
 INSERT INTO clientes (nombre, apellido, email, create_at, foto) VALUES('Janie', 'Roe', 'janie.roe@gmail.com', '2017-08-21', '');
 INSERT INTO clientes (nombre, apellido, email, create_at, foto) VALUES('John', 'Smith', 'john.smith@gmail.com', '2017-08-22', '');
 INSERT INTO clientes (nombre, apellido, email, create_at, foto) VALUES('Joe', 'Bloggs', 'joe.bloggs@gmail.com', '2017-08-23', '');
@@ -208,6 +209,14 @@ INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Sony Notebook Z
 INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Hewlett Packard Multifuncional F2280', 69990, 8, NOW());
 INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Bianchi Bicicleta Aro 26', 69990, 10, NOW());
 INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Mica Comoda 5 Cajones', 299990, 15, NOW());
+
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Coca Cola', 40, 5, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Arroz', 23, 10, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Frijol', 25, 6, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Galleta Maria', 11, 3, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Galleta Pan Crema', 12, 8, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Doritos', 16, 10, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Takis Guacamole', 15, 15, NOW());
 
 /* Creamos algunas facturas */
 INSERT INTO facturas (n_productos, total, id_cliente, create_at) VALUES(4, 667960, 1, NOW());
@@ -225,23 +234,23 @@ SELECT * FROM facturas;
 SELECT * FROM facturas_items;
 SELECT * FROM productos;
 
-SELECT 
-    clientes.id_cliente, 
-    clientes.nombre, 
+SELECT
+    clientes.id_cliente,
+    clientes.nombre,
     facturas.id_factura,
     facturas_items.id_factura_item,
     productos.nombre,
     productos.precio
-FROM 
-    clientes 
-    INNER JOIN facturas 
-ON 
+FROM
+    clientes
+    INNER JOIN facturas
+ON
     facturas.id_cliente = clientes.id_cliente
     INNER JOIN facturas_items
-ON 
+ON
     facturas.id_factura = facturas_items.id_factura
     INNER JOIN productos
-ON  
+ON
     facturas_items.id_producto = productos.id_producto;
 
 --   FUNCIONES
@@ -251,14 +260,14 @@ CREATE OR REPLACE FUNCTION total_factura (INT) RETURNS TABLE (total productos.pr
 AS
 $BODY$
 BEGIN
-    RETURN QUERY SELECT 
-                    SUM(productos.precio) 
-                 FROM 
-                    productos 
-                 INNER JOIN facturas_items 
-                 ON productos.id_producto = facturas_items.id_producto 
-                 INNER JOIN facturas 
-                 ON facturas_items.id_factura = facturas.id_factura 
+    RETURN QUERY SELECT
+                    SUM(productos.precio)
+                 FROM
+                    productos
+                 INNER JOIN facturas_items
+                 ON productos.id_producto = facturas_items.id_producto
+                 INNER JOIN facturas
+                 ON facturas_items.id_factura = facturas.id_factura
                  WHERE facturas.id_factura = $1;
 END;
 $BODY$
@@ -273,11 +282,11 @@ $BODY$
 
     BEGIN
 
-        RETURN QUERY SELECT 
-                        usuarios.usuario 
-                     FROM 
-                        usuarios 
-                     WHERE usuarios.usuario = _usuario 
+        RETURN QUERY SELECT
+                        usuarios.usuario
+                     FROM
+                        usuarios
+                     WHERE usuarios.usuario = _usuario
                      AND encode(decrypt(usuarios.contra::bytea, 'llave', '3des'::text), 'escape'::text) = _contra;
 
     END;
@@ -289,7 +298,7 @@ SELECT autenticacion ('Javier', 'Duran2001');
 
 
 CREATE FUNCTION concatenar(text, text, text)
-    RETURNS text AS 
+    RETURNS text AS
     $$
         BEGIN
             IF $1 IS NULL THEN
@@ -304,7 +313,7 @@ LANGUAGE plpgsql;
 SELECT concatenar('E'', 'Javier', 'E'');
 
 
-CREATE OR REPLACE FUNCTION filtrar_clientes (tipo CHARACTER VARYING, busqueda CHARACTER VARYING) 
+CREATE OR REPLACE FUNCTION filtrar_clientes (tipo CHARACTER VARYING, busqueda CHARACTER VARYING)
 RETURNS SETOF clientes
 AS
 $BODY$
@@ -342,7 +351,7 @@ SELECT * FROM filtrar_clientes ('direccion', 'Las lomas');
 SELECT * FROM filtrar_clientes ('telefono', '9626302716');
 SELECT * FROM filtrar_clientes ('create_at', '2021-09-11');
 
-CREATE OR REPLACE FUNCTION filtrar_clientes (INT) 
+CREATE OR REPLACE FUNCTION filtrar_clientes (INT)
 RETURNS SETOF clientes
 AS
 $BODY$
@@ -352,7 +361,7 @@ LANGUAGE 'sql';
 
 SELECT * FROM filtrar_clientes (1);
 
-CREATE OR REPLACE FUNCTION leer_clientes () 
+CREATE OR REPLACE FUNCTION leer_clientes ()
 RETURNS SETOF clientes
 AS
 $BODY$
@@ -374,7 +383,7 @@ $BODY$
         RETURN QUERY SELECT id_cliente, nombre, apellidop, apellidom, edad, email, direccion, telefono, create_at
                      FROM clientes ORDER BY id_cliente
                      LIMIT _limite::INT OFFSET inicio;
-    
+
     END;
 $BODY$
 LANGUAGE plpgsql;
@@ -383,17 +392,17 @@ SELECT * FROM consulta_paginada_clientes('10', '1');
 /* FUNCION PARA INGRESAR CLIENTES */
 CREATE OR REPLACE FUNCTION ingresa_cliente(
     _nombre CHARACTER VARYING,
-    _apellidop CHARACTER VARYING, 
-    _apellidom CHARACTER VARYING, 
+    _apellidop CHARACTER VARYING,
+    _apellidom CHARACTER VARYING,
     _edad CHARACTER VARYING,
-    _email CHARACTER VARYING, 
-    _direccion CHARACTER VARYING, 
+    _email CHARACTER VARYING,
+    _direccion CHARACTER VARYING,
     _telefono CHARACTER VARYING
 ) RETURNS VOID AS
 $BODY$
 
     BEGIN
-        INSERT INTO clientes (id_cliente, nombre, apellidop, apellidom, edad, email, direccion, telefono, create_at)   
+        INSERT INTO clientes (id_cliente, nombre, apellidop, apellidom, edad, email, direccion, telefono, create_at)
         VALUES (DEFAULT, _nombre, _apellidop, _apellidom, _edad::INT, _email, _direccion, _telefono, DEFAULT);
     END;
 
@@ -459,58 +468,58 @@ SELECT ingresa_cliente('Victor', 'Diaz', 'Esteban', '23', 'victor.diaz@gmail.com
 SELECT ingresa_cliente('Juan Carlos', 'Fernandez', 'Lopez', '49', 'deny.lizarazo@gmail.com', 'Nayarit', '4918719524');
 
 
-Aguascalientes 
-Baja California 
-Baja California Sur 
-Campeche 
-Chiapas 
+Aguascalientes
+Baja California
+Baja California Sur
+Campeche
+Chiapas
 Chihuahua
 
-Ciudad de México 
-Coahuila 
-Colima 
-Durango 
-Estado de México 
-Guanajuato 
-Guerrero 
-Hidalgo 
-Jalisco 
-Michoacán 
-Morelos 
-Nayarit 
-Nuevo León 
-Oaxaca 
-Puebla 
+Ciudad de México
+Coahuila
+Colima
+Durango
+Estado de México
+Guanajuato
+Guerrero
+Hidalgo
+Jalisco
+Michoacán
+Morelos
+Nayarit
+Nuevo León
+Oaxaca
+Puebla
 
 
-Querétaro 
-Quintana Roo 
-San Luis Potosí 
-Sinaloa 
-Sonora 
-Tabasco 
-Tamaulipas 
-Tlaxcala 
-Veracruz 
-Yucatán 
-Zacatecas 
+Querétaro
+Quintana Roo
+San Luis Potosí
+Sinaloa
+Sonora
+Tabasco
+Tamaulipas
+Tlaxcala
+Veracruz
+Yucatán
+Zacatecas
 
-CREATE OR REPLACE FUNCTION actualizar_cliente( 
-    _id INT,
+CREATE OR REPLACE FUNCTION actualizar_cliente(
+    _id CHARACTER VARYING,
     _nombre CHARACTER VARYING,
-    _apellidop CHARACTER VARYING, 
-    _apellidom CHARACTER VARYING, 
+    _apellidop CHARACTER VARYING,
+    _apellidom CHARACTER VARYING,
     _edad CHARACTER VARYING,
-    _email CHARACTER VARYING, 
-    _direccion CHARACTER VARYING, 
+    _email CHARACTER VARYING,
+    _direccion CHARACTER VARYING,
     _telefono CHARACTER VARYING
 ) RETURNS VOID AS
 $BODY$
 
     BEGIN
-        UPDATE clientes SET nombre = _nombre, 
-                            apellidop = _apellidop, 
-                            apellidom = _apellidom, 
+        UPDATE clientes SET nombre = _nombre,
+                            apellidop = _apellidop,
+                            apellidom = _apellidom,
                             edad = _edad::INT,
                             email = _email,
                             direccion = _direccion,
@@ -524,7 +533,7 @@ LANGUAGE plpgsql;
 
 SELECT actualizar_cliente(4, 'John', 'Doe', 'Barrios', '45', 'john.doe@gmail.com', 'Tapachula', '9876541591');
 
-CREATE OR REPLACE FUNCTION eliminar_cliente(_id INT) 
+CREATE OR REPLACE FUNCTION eliminar_cliente(_id INT)
 RETURNS VOID AS
 $BODY$
     BEGIN
@@ -534,3 +543,120 @@ $BODY$
 LANGUAGE plpgsql;
 
 SELECT eliminar_cliente(4);
+
+
+--          PRODUCTOS
+------
+CREATE OR REPLACE FUNCTION leer_productos ()
+RETURNS SETOF productos
+AS
+$BODY$
+        SELECT * FROM productos;
+$BODY$
+LANGUAGE 'sql';
+
+SELECT * FROM leer_productos ();
+
+------
+CREATE OR REPLACE FUNCTION consulta_paginada_productos(_limite CHARACTER VARYING, _pagina CHARACTER VARYING)
+RETURNS SETOF productos AS
+$BODY$
+    DECLARE
+        inicio INT;
+    BEGIN
+        inicio = _limite::INT * _pagina::INT - _limite::INT;
+        RETURN QUERY SELECT id_producto, nombre, precio, stock, create_at
+                     FROM productos ORDER BY id_producto
+                     LIMIT _limite::INT OFFSET inicio;
+
+    END;
+$BODY$
+LANGUAGE plpgsql;
+
+------
+SELECT * FROM consulta_paginada_productos('10', '1');
+
+------
+CREATE OR REPLACE FUNCTION filtrar_productos (INT)
+RETURNS SETOF productos
+AS
+$BODY$
+        SELECT * FROM productos WHERE productos.id_producto = $1::SMALLINT;
+$BODY$
+LANGUAGE 'sql';
+
+SELECT * FROM filtrar_productos (1);
+
+------
+CREATE OR REPLACE FUNCTION filtrar_productos (tipo CHARACTER VARYING, busqueda CHARACTER VARYING)
+RETURNS SETOF productos
+AS
+$BODY$
+    BEGIN
+        IF tipo = 'id_producto' THEN
+            RETURN QUERY SELECT * FROM productos WHERE id_producto = busqueda::SMALLINT;
+        ELSIF tipo = 'nombre'THEN
+            RETURN QUERY SELECT * FROM productos WHERE nombre = busqueda;
+        ELSIF tipo = 'precio'THEN
+            RETURN QUERY SELECT * FROM productos WHERE precio = busqueda::NUMERIC;
+        ELSIF tipo = 'stock'THEN
+            RETURN QUERY SELECT * FROM productos WHERE stock = busqueda::INT;
+        ELSIF tipo = 'create_at'THEN
+            RETURN QUERY SELECT * FROM productos WHERE create_at = busqueda::DATE;
+        END IF;
+    END;
+$BODY$
+LANGUAGE 'plpgsql';
+
+SELECT * FROM filtrar_clientes ('id_cliente', '1');
+
+/* FUNCION PARA INGRESAR PRODUCTOS */
+CREATE OR REPLACE FUNCTION ingresa_producto(
+    _nombre CHARACTER VARYING,
+    _precio CHARACTER VARYING,
+    _stock CHARACTER VARYING
+) RETURNS VOID AS
+$BODY$
+
+    BEGIN
+        INSERT INTO productos (id_producto, nombre, precio, stock, create_at)
+        VALUES (DEFAULT, _nombre, _precio::NUMERIC, _stock::INT, DEFAULT);
+    END;
+
+$BODY$
+LANGUAGE plpgsql;
+
+SELECT ingresa_producto('Top-Tops', '10', '10');
+
+-- ACTUALIZAR PRODUCTOS
+CREATE OR REPLACE FUNCTION actualizar_producto(
+    _id CHARACTER VARYING,
+    _nombre CHARACTER VARYING,
+    _precio CHARACTER VARYING,
+    _stock CHARACTER VARYING
+) RETURNS VOID AS
+$BODY$
+
+    BEGIN
+        UPDATE productos SET nombre = _nombre,
+                            precio = _precio::NUMERIC,
+                            stock = _stock::SMALLINT
+        WHERE productos.id_producto = _id::SMALLINT;
+
+    END;
+
+$BODY$
+LANGUAGE plpgsql;
+
+-- ELIMINAR PRODUCTO
+CREATE OR REPLACE FUNCTION eliminar_producto(_id INT)
+RETURNS VOID AS
+$BODY$
+    BEGIN
+        DELETE FROM productos WHERE id_producto = _id::SMALLINT;
+    END;
+$BODY$
+LANGUAGE plpgsql;
+
+
+

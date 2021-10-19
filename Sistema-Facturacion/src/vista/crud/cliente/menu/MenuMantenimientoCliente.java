@@ -6,8 +6,8 @@
 package vista.crud.cliente.menu;
 
 import javax.swing.JTabbedPane;
-import vista.crud.cliente.menu.listado.PanelListadoCliente;
-import vista.crud.cliente.menu.mantenimiento.PanelMantenimientoCliente;
+import vista.crud.cliente.menu.listado.ListadoCliente;
+import vista.crud.cliente.menu.mantenimiento.MantenimientoCliente;
 
 /**
  *
@@ -15,12 +15,12 @@ import vista.crud.cliente.menu.mantenimiento.PanelMantenimientoCliente;
  */
 public class MenuMantenimientoCliente extends JTabbedPane{
     
-    public PanelListadoCliente ventanaListadoCliente;
-    public PanelMantenimientoCliente panelMantenimientoCliente;
+    public ListadoCliente ventanaListadoCliente;
+    public MantenimientoCliente panelMantenimientoCliente;
     
     public MenuMantenimientoCliente() {
-        ventanaListadoCliente = new PanelListadoCliente();
-        panelMantenimientoCliente = new PanelMantenimientoCliente();
+        ventanaListadoCliente = new ListadoCliente();
+        panelMantenimientoCliente = new MantenimientoCliente();
         
         add("Listado",ventanaListadoCliente);
         add("Mantenimiento", panelMantenimientoCliente);

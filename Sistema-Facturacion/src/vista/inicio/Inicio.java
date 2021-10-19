@@ -119,6 +119,7 @@ public class Inicio {
         barraMenu.add(mantenimiento);
         
         clienteMantenimiento.addActionListener(controladorInicio);
+        productoMantenimiento.addActionListener(controladorInicio);
     }
     
     private void menuConsultas() {
@@ -190,10 +191,12 @@ public class Inicio {
     }
     
     public void addContenedor(JPanel panel) {
-        
+        if  (contenedor.getComponentCount()>0) {
+            System.out.println("....");
+            contenedor.removeAll();
+        }
         contenedor.add(panel, BorderLayout.CENTER);
         SwingUtilities.updateComponentTreeUI(ventanaInicio);
-        
     }
     
     public JMenuItem getClienteConsultas() {
@@ -208,6 +211,10 @@ public class Inicio {
         return clienteMantenimiento;
     }
 
+    public JMenuItem getProductoMantenimiento() {
+        return productoMantenimiento;
+    }
+    
     public JMenuItem getFacturaMantenimiento() {
         return facturaMantenimiento;
     }

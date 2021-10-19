@@ -18,10 +18,10 @@ import javax.swing.JOptionPane;
 import modelo.Conexion;
 import modelo.entidades.Cliente;
 import modelo.interfaces.ICliente;
-import modelo.query.ActualizarCliente;
-import modelo.query.EliminarCliente;
-import modelo.query.InsertarCliente;
-import modelo.query.LeerCliente;
+import modelo.query.Actualizar;
+import modelo.query.Eliminar;
+import modelo.query.Crear;
+import modelo.query.Leer;
 
 /**
  *
@@ -34,24 +34,24 @@ public class ClienteDAO implements ICliente{
     private ResultSet rs;
     
     
-    private final LeerCliente leer;
-    private final InsertarCliente insertar;
-    private final ActualizarCliente actualizar;
-    private final EliminarCliente eliminar;
+    private final Leer leer;
+    private final Crear crear;
+    private final Actualizar actualizar;
+    private final Eliminar eliminar;
     
     public ClienteDAO() {
         CON = Conexion.getInstacia();
         
-        leer = new LeerCliente();
-        insertar = new InsertarCliente();
-        actualizar = new ActualizarCliente();
-        eliminar = new EliminarCliente();
+        leer = new Leer();
+        crear = new Crear();
+        actualizar = new Actualizar();
+        eliminar = new Eliminar();
     }
 
     @Override
     public List<Cliente> listar() {
         
-        List<Cliente> lista = leer.leer();
+        List<Cliente> lista = (List<Cliente>) ((List<?>) leer.leer("cliente"));
         
         return lista;
         
@@ -59,44 +59,44 @@ public class ClienteDAO implements ICliente{
 
     @Override
     public List<Cliente> filtar(String tipo,String busqueda) {
-        List<Cliente> lista = leer.filtrar(tipo, busqueda);
+        List<Cliente> lista = (List<Cliente>) ((List<?>) leer.filtrar(tipo, busqueda, "clientes"));
         
         return lista;
     }
 
     @Override
     public List<Cliente> paginar(String limite, String pagina) {
-        List<Cliente> lista = leer.paginar(limite, pagina);
+        List<Cliente> lista = (List<Cliente>) ((List<?>) leer.paginar(limite, pagina, "clientes"));
         
         return lista;
     }
 
-    public LeerCliente getLeer() {
+    public Leer getLeer() {
         return leer;
     }
 
     @Override
     public void ingresar(String nombre, String apellidp, String apellidom, String edad, String email, String direccion, String telefono) {
         
-        insertar.ingresar(nombre, apellidp, apellidom, edad, email, direccion, telefono);
+        crear.ingresar("clientes", nombre, apellidp, apellidom, edad, email, direccion, telefono);
         
     }
 
     @Override
     public Cliente filtar(int id) {
-        Cliente cliente = leer.filtrar(id);
+        Cliente cliente = (Cliente) leer.filtrar(id, "clientes");
         
         return cliente;
     }
 
     @Override
-    public void actualizar(int id, String nombre, String apellidp, String apellidom, String edad, String email, String direccion, String telefono) {
-        actualizar.actualizar(id, nombre, apellidp, apellidom, edad, email, direccion, telefono);
+    public void actualizar(String id, String nombre, String apellidp, String apellidom, String edad, String email, String direccion, String telefono) {
+        actualizar.actualizar("clientes", id, nombre, apellidp, apellidom, edad, email, direccion, telefono);
     }
 
     @Override
     public void eliminar(int id) {
-        eliminar.eliminar(id);
+        eliminar.eliminar("clientes", id);
     }
     
 }

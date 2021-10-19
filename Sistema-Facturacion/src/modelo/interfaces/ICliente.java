@@ -24,7 +24,7 @@ public interface ICliente {
     
     public void ingresar(String nombre, String apellidp, String apellidom, String edad, String email, String direccion, String telefono);
     
-    public void actualizar(int id, String nombre, String apellidp, String apellidom, String edad, String email, String direccion, String telefono);
+    public void actualizar(String id, String nombre, String apellidp, String apellidom, String edad, String email, String direccion, String telefono);
 
     public void eliminar(int id);
 }

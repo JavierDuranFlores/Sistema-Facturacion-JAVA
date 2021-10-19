@@ -5,6 +5,7 @@
  */
 package main;
 
+import vista.inicio.Inicio;
 import vista.login.LoginVentana;
 
 /**
@@ -14,7 +15,7 @@ import vista.login.LoginVentana;
 public class Main {
 
     public static void main(String[] args) {
-        LoginVentana vtn = new LoginVentana();
+        Inicio vtn = new Inicio();
         vtn.iniciarComponentes();
     }
 }

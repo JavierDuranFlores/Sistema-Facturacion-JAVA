@@ -10,7 +10,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import vista.crud.cliente.menu.mantenimiento.ComponentesClienteUpdateDelete;
-import vista.crud.cliente.menu.mantenimiento.clienteu.ComponentesClienteUpdate;
 
 /**
  *

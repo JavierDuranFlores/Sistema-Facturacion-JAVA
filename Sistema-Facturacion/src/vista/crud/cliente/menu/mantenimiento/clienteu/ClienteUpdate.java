@@ -6,9 +6,7 @@
 package vista.crud.cliente.menu.mantenimiento.clienteu;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import vista.crud.cliente.menu.mantenimiento.clientec.*;
 import javax.swing.JPanel;
 import vista.crud.cliente.menu.mantenimiento.ComponentesClienteUpdateDelete;
 import vista.crud.cliente.menu.mantenimiento.ComponentesMantenimientoClienteErrores;
@@ -22,7 +20,7 @@ public class ClienteUpdate extends JPanel{
     private JPanel panelCrear;
     private JPanel panelErrores;
     private ComponentesClienteUpdateDelete componentesClienteUpdate;
-    private ComponentesMantenimientoClienteErrores componentesClienteErrores;
+    private ComponentesMantenimientoClienteErrores comoComponentesMantenimientoClienteErrores;
     
     public ClienteUpdate() {
         setLayout(new BorderLayout());
@@ -52,8 +50,8 @@ public class ClienteUpdate extends JPanel{
     }
     
     private void addPanelComponentesErrores() {
-        componentesClienteErrores = new ComponentesMantenimientoClienteErrores(92, 38, 41, 37,38, 85);
-        panelErrores.add(componentesClienteErrores, BorderLayout.EAST);
+        comoComponentesMantenimientoClienteErrores = new ComponentesMantenimientoClienteErrores(92, 38, 41, 37,38, 85);
+        panelErrores.add(comoComponentesMantenimientoClienteErrores, BorderLayout.EAST);
     }
 
     public ComponentesClienteUpdateDelete getComponentesClienteUpdate() {
@@ -61,7 +59,7 @@ public class ClienteUpdate extends JPanel{
     }
 
     public ComponentesMantenimientoClienteErrores getComponentesClienteErrores() {
-        return componentesClienteErrores;
+        return comoComponentesMantenimientoClienteErrores;
     }
     
     
