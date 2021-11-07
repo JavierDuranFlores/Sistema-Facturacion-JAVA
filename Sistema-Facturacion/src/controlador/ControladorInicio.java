@@ -8,6 +8,7 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import vista.crud.cliente.PrincipalMantenimientoCliente;
+import vista.crud.factura.PrincipalMantenimientoFactura;
 import vista.crud.producto.PrincipalMantenimientoProducto;
 import vista.inicio.Inicio;
 
@@ -18,22 +19,26 @@ import vista.inicio.Inicio;
 public class ControladorInicio implements ActionListener{
 
     private final Inicio inicio;
-    private final PrincipalMantenimientoCliente ventanaMantenimientoCliente;
-    private final PrincipalMantenimientoProducto mantenimientoProducto;
+    private final PrincipalMantenimientoCliente principalMantenimientoCliente;
+    private final PrincipalMantenimientoProducto principalMantenimientoProducto;
+    private final PrincipalMantenimientoFactura principalMantenimientoFactura;
     
     public ControladorInicio(Inicio inicio) {
         this.inicio = inicio;
-        ventanaMantenimientoCliente = new PrincipalMantenimientoCliente();
-        mantenimientoProducto = new PrincipalMantenimientoProducto();
+        principalMantenimientoCliente = new PrincipalMantenimientoCliente();
+        principalMantenimientoProducto = new PrincipalMantenimientoProducto();
+        principalMantenimientoFactura = PrincipalMantenimientoFactura.getInstance();
     }
     
     @Override
     public void actionPerformed(ActionEvent ae) {
         
         if (ae.getSource() == inicio.getClienteMantenimiento()) {
-            inicio.addContenedor(ventanaMantenimientoCliente);
+            inicio.addContenedor(principalMantenimientoCliente);
         } else if (ae.getSource() == inicio.getProductoMantenimiento()) {
-            inicio.addContenedor(mantenimientoProducto);
+            inicio.addContenedor(principalMantenimientoProducto);
+        } else if (ae.getSource() == inicio.getFacturaMantenimiento()) {
+            inicio.addContenedor(principalMantenimientoFactura);
         }
         
     }

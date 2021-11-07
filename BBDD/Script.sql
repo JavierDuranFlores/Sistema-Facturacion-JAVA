@@ -218,12 +218,110 @@ INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Galleta Pan Cre
 INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Doritos', 16, 10, NOW());
 INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Takis Guacamole', 15, 15, NOW());
 
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Jugo Manzana', 25, 5, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Jugo Uva', 23, 10, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Jugo Limon', 25, 6, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Jugo Mango', 11, 3, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Jugo Fresa', 12, 8, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Sabrita Chetos', 16, 10, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Takis Barbacoa', 15, 15, NOW());
+--
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Hamburguesas', 40, 5, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Aceite de Girasol', 23, 10, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Aceite de Maíz', 25, 6, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Aceite Mezcla', 26, 3, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Arroz Blanco', 28, 8, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Edulcorante', 16, 10, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Mayonesa', 15, 15, NOW());
+
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Mostaza', 25, 5, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Sal', 23, 10, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Vinagre', 25, 6, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Atún', 15, 3, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Salsa Tomate', 12, 8, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Mermelada', 20, 10, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Harina de Maíz', 15, 15, NOW());
+
+--
+
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Harina de Trigo', 20, 5, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Huevos', 50, 10, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Café Instantáneo 50g', 50, 6, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Café 180g', 90, 3, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Pan de molde', 28, 8, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Fideos guiseros', 16, 10, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Fideos largos', 15, 15, NOW());
+
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Pañales extra grandes', 130, 5, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Agua sin gas', 23, 10, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Salchichas', 25, 6, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Jamón cocido', 25, 3, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Paleta', 12, 8, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Paté', 20, 10, NOW());
+INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Picadillo de carne', 25, 15, NOW());
+
 /* Creamos algunas facturas */
 INSERT INTO facturas (n_productos, total, id_cliente, create_at) VALUES(4, 667960, 1, NOW());
 INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 1, 1);
 INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(2, 1, 4);
 INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 1, 5);
 INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 1, 7);
+INSERT INTO facturas (n_productos, total, id_cliente, create_at) VALUES(2, 667960, 2, NOW());
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 2, 8);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(2, 2, 7);
+INSERT INTO facturas (n_productos, total, id_cliente, create_at) VALUES(4, 667960, 3, NOW());
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 3, 1);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(2, 3, 4);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 3, 5);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 3, 7);
+INSERT INTO facturas (n_productos, total, id_cliente, create_at) VALUES(2, 667960, 4, NOW());
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 4, 8);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(2, 4, 7);
+
+INSERT INTO facturas (n_productos, total, id_cliente, create_at) VALUES(4, 667960, 5, NOW());
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 5, 1);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(2, 5, 4);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 5, 5);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 5, 7);
+INSERT INTO facturas (n_productos, total, id_cliente, create_at) VALUES(2, 667960, 6, NOW());
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 6, 8);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(2, 6, 7);
+INSERT INTO facturas (n_productos, total, id_cliente, create_at) VALUES(4, 667960, 7, NOW());
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 7, 1);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(2, 7, 4);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 7, 5);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 7, 7);
+INSERT INTO facturas (n_productos, total, id_cliente, create_at) VALUES(2, 667960, 8, NOW());
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 8, 8);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(2, 8, 7);
+
+-----------------
+
+INSERT INTO facturas (n_productos, total, id_cliente, create_at) VALUES(4, 667960, 9, NOW());
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 9, 1);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(2, 9, 4);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 9, 5);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 9, 7);
+INSERT INTO facturas (n_productos, total, id_cliente, create_at) VALUES(2, 667960, 10, NOW());
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 10, 8);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(2, 10, 7);
+
+INSERT INTO facturas (n_productos, total, id_cliente, create_at) VALUES(4, 667960, 11, NOW());
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 11, 1);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(2, 11, 4);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 11, 5);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 11, 7);
+INSERT INTO facturas (n_productos, total, id_cliente, create_at) VALUES(2, 667960, 12, NOW());
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 12, 8);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(2, 12, 7);
+INSERT INTO facturas (n_productos, total, id_cliente, create_at) VALUES(4, 667960, 13, NOW());
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 13, 1);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(2, 13, 4);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 13, 5);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 13, 7);
+INSERT INTO facturas (n_productos, total, id_cliente, create_at) VALUES(2, 667960, 14, NOW());
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(1, 14, 8);
+INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES(2, 14, 7);
 
 INSERT INTO facturas (descripcion, observacion, cliente_id, create_at) VALUES('Factura Bicicleta', 'Alguna nota importante!', 1, NOW());
 INSERT INTO facturas_items (cantidad, factura_id, producto_id) VALUES(3, 2, 6);
@@ -658,5 +756,243 @@ $BODY$
 $BODY$
 LANGUAGE plpgsql;
 
+--          FACTURAS
+------
+CREATE OR REPLACE FUNCTION leer_facturas ()
+RETURNS SETOF facturas
+AS
+$BODY$
+        SELECT * FROM facturas;
+$BODY$
+LANGUAGE 'sql';
+
+SELECT * FROM leer_facturas ();
+
+------
+CREATE OR REPLACE FUNCTION consulta_paginada_facturas(_limite CHARACTER VARYING, _pagina CHARACTER VARYING)
+RETURNS SETOF facturas AS
+$BODY$
+    DECLARE
+        inicio INT;
+    BEGIN
+        inicio = _limite::INT * _pagina::INT - _limite::INT;
+        RETURN QUERY SELECT id_factura, n_productos, total, id_cliente, create_at
+                     FROM facturas ORDER BY id_factura
+                     LIMIT _limite::INT OFFSET inicio;
+
+    END;
+$BODY$
+LANGUAGE plpgsql;
+
+SELECT * FROM consulta_paginada_facturas('10', '1');
+
+------ FACTURAS
+
+CREATE OR REPLACE FUNCTION ingresa_facturas(CHARACTER VARYING, CHARACTER VARYING, CHARACTER VARYING)
+RETURNS VOID
+AS
+$BODY$
+
+    BEGIN
+        INSERT INTO facturas (n_productos, total, id_cliente) VALUES ($1::SMALLINT, $2::NUMERIC, $3::SMALLINT);
+    END;
+
+$BODY$
+LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION filtrar_facturas (tipo CHARACTER VARYING, busqueda CHARACTER VARYING)
+RETURNS SETOF facturas
+AS
+$BODY$
+    BEGIN
+        IF tipo = 'id_factura' THEN
+            RETURN QUERY SELECT * FROM facturas WHERE id_factura = busqueda::SMALLINT;
+        ELSIF tipo = 'n_productos'THEN
+            RETURN QUERY SELECT * FROM facturas WHERE n_productos = busqueda::SMALLINT;
+        ELSIF tipo = 'total'THEN
+            RETURN QUERY SELECT * FROM facturas WHERE total = busqueda::NUMERIC;
+        ELSIF tipo = 'id_cliente'THEN
+            RETURN QUERY SELECT * FROM facturas WHERE id_cliente = busqueda::SMALLINT;
+        ELSIF tipo = 'create_at'THEN
+            RETURN QUERY SELECT * FROM facturas WHERE create_at = busqueda::DATE;
+        END IF;
+    END;
+$BODY$
+LANGUAGE 'plpgsql';
+
+SELECT * FROM filtrar_facturas ('id_factura', '2');
+
+/* FUNCION PARA INSERTAR EN LA TABLA facturas_items */
+
+CREATE OR REPLACE FUNCTION ingresa_facturas_items(CHARACTER VARYING, CHARACTER VARYING, CHARACTER VARYING)
+RETURNS VOID
+AS
+$BODY$
+
+    BEGIN
+        INSERT INTO facturas_items (cantidad, id_factura, id_producto) VALUES ($1::INT, $2::SMALLINT, $3::SMALLINT);
+    END;
+
+$BODY$
+LANGUAGE plpgsql;
+
+/* PRODUCTOS EN SUS FACTURAS */
+SELECT productos.id_producto,
+       productos.nombre,
+       productos.precio,
+       productos.stock,
+       facturas_items.id_factura
+FROM productos
+INNER JOIN facturas_items
+ON productos.id_producto = facturas_items.id_producto;
 
 
+CREATE OR REPLACE FUNCTION leer_facturas_items()
+RETURNS TABLE (idf SMALLINT, np SMALLINT , totalf NUMERIC,  idc SMALLINT, caf DATE, idfi SMALLINT, cantidadfi INT, idp SMALLINT, nombrep CHARACTER VARYING, preciop NUMERIC(12, 2), stockp INT, cap DATE) AS
+$BODY$
+
+    BEGIN
+
+        RETURN QUERY SELECT f.id_factura,
+               f.n_productos,
+               f.total,
+               f.id_cliente,
+               f.create_at,
+               fi.id_factura_item,
+               fi.cantidad,
+               p.id_producto,
+               p.nombre,
+               p.precio,
+               p.stock,
+               p.create_at
+        FROM facturas AS f
+        INNER JOIN facturas_items AS fi
+        ON f.id_factura = fi.id_factura
+        INNER JOIN productos AS p
+        ON fi.id_producto = p.id_producto;
+
+    END;
+
+$BODY$
+LANGUAGE plpgsql;
+
+
+SELECT * FROM leer_facturas_items();
+
+CREATE OR REPLACE FUNCTION filtrar_facturas_items(CHARACTER VARYING)
+RETURNS TABLE (idf SMALLINT, np SMALLINT , totalf NUMERIC,  idc SMALLINT, caf DATE, idfi SMALLINT, cantidadfi INT, idp SMALLINT, nombrep CHARACTER VARYING, preciop NUMERIC(12, 2), stockp INT, cap DATE) AS
+$BODY$
+
+    BEGIN
+
+        RETURN QUERY SELECT f.id_factura,
+               f.n_productos,
+               f.total,
+               f.id_cliente,
+               f.create_at,
+               fi.id_factura_item,
+               fi.cantidad,
+               p.id_producto,
+               p.nombre,
+               p.precio,
+               p.stock,
+               p.create_at
+        FROM facturas AS f
+        INNER JOIN facturas_items AS fi
+        ON f.id_factura = fi.id_factura
+        INNER JOIN productos AS p
+        ON fi.id_producto = p.id_producto WHERE f.id_factura = $1::SMALLINT;
+
+    END;
+
+$BODY$
+LANGUAGE plpgsql;
+
+SELECT * FROM filtrar_facturas_items('9');
+
+CREATE OR REPLACE FUNCTION eliminar_factura(INT)
+RETURNS VOID AS
+$BODY$
+
+    BEGIN
+
+        DELETE FROM facturas WHERE id_factura = $1::SMALLINT;
+
+    END;
+
+$BODY$
+LANGUAGE plpgsql;
+
+SELECT eliminar_factura(21);
+
+SELECT facturas.id_factura,
+       facturas.n_productos,
+       facturas_items.cantidad,
+       facturas.total,
+       facturas.id_cliente,
+       facturas.create_at,
+       productos.id_producto,
+       productos.nombre,
+       productos.precio,
+       productos.stock,
+       productos.create_at
+FROM facturas
+INNER JOIN facturas_items
+ON facturas.id_factura = facturas_items.id_factura
+INNER JOIN productos
+ON facturas_items.id_producto = productos.id_producto;
+GROUP BY ;
+
+-- ACTUALIZAR FACTURA
+CREATE OR REPLACE FUNCTION actualizar_facturas(CHARACTER VARYING, CHARACTER VARYING, CHARACTER VARYING, CHARACTER VARYING)
+RETURNS VOID
+AS
+$BODY$
+
+    BEGIN
+        UPDATE facturas
+        SET n_productos = $1::SMALLINT,
+            total = $2::NUMERIC,
+            id_cliente = $3::SMALLINT,
+            create_at = NOW()
+        WHERE id_factura = $4::SMALLINT;
+    END;
+
+$BODY$
+LANGUAGE plpgsql;
+
+
+
+-- ACTUALIZAR FACUTRAS ITEMS
+CREATE OR REPLACE FUNCTION actualizar_facturas_items(CHARACTER VARYING, CHARACTER VARYING, CHARACTER VARYING, CHARACTER VARYING)
+RETURNS VOID
+AS
+$BODY$
+
+    BEGIN
+        UPDATE facturas_items
+        SET cantidad = $1::INT,
+            id_factura = $2::SMALLINT,
+            id_producto = $3::SMALLINT
+        WHERE id_factura_item = $4::SMALLINT;
+    END;
+
+$BODY$
+LANGUAGE plpgsql;
+
+
+-- ELIMINAR FACTURA ITEMS
+CREATE OR REPLACE FUNCTION eliminar_factura_items(INT)
+RETURNS VOID
+AS
+$BODY$
+
+    BEGIN
+
+        DELETE FROM facturas_items
+        WHERE id_factura_item = $1::SMALLINT;
+
+    END;
+
+$BODY$
+LANGUAGE plpgsql;

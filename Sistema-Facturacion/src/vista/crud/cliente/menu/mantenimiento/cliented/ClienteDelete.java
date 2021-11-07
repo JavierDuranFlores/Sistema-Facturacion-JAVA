@@ -6,7 +6,6 @@
 package vista.crud.cliente.menu.mantenimiento.cliented;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JPanel;
 import vista.crud.cliente.menu.mantenimiento.ComponentesClienteUpdateDelete;

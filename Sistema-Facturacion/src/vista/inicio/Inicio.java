@@ -120,6 +120,7 @@ public class Inicio {
         
         clienteMantenimiento.addActionListener(controladorInicio);
         productoMantenimiento.addActionListener(controladorInicio);
+        facturaMantenimiento.addActionListener(controladorInicio);
     }
     
     private void menuConsultas() {
@@ -192,7 +193,6 @@ public class Inicio {
     
     public void addContenedor(JPanel panel) {
         if  (contenedor.getComponentCount()>0) {
-            System.out.println("....");
             contenedor.removeAll();
         }
         contenedor.add(panel, BorderLayout.CENTER);

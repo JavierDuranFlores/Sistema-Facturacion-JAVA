@@ -48,6 +48,23 @@ public class Crear {
                 ps.execute();
 
                 JOptionPane.showMessageDialog(null, "PRODUCTO INGRESADO");
+            } else if(datos[0].equals("facturas")) {
+                System.out.println("facturas");
+                ps = CON.conectar().prepareStatement("SELECT ingresa_facturas(?, ?, ?);");
+                ps.setString(1, datos[1]);
+                ps.setString(2, datos[2]);
+                ps.setString(3, datos[3]);
+                ps.execute();
+
+                JOptionPane.showMessageDialog(null, "FACTURA INGRESADA");
+            } else if(datos[0].equals("facturas_items")) {
+                ps = CON.conectar().prepareStatement("SELECT ingresa_facturas_items(?, ?, ?);");
+                ps.setString(1, datos[1]);
+                ps.setString(2, datos[2]);
+                ps.setString(3, datos[3]);
+                ps.execute();
+
+                //JOptionPane.showMessageDialog(null, "FACTURA INGRESADO");
             }
             //TODO: las funciones en postgres
         } catch (SQLException ex) {
@@ -57,6 +74,10 @@ public class Crear {
                     break;
                 case "productos":
                     JOptionPane.showMessageDialog(null, "PRODUCTO NO INGRESADO", "ERROR", 0);
+                    break;
+                case "facturas":
+                    JOptionPane.showMessageDialog(null, "FACTURA NO INGRESADO", "ERROR", 0);
+                    System.out.println(ex.getMessage());
                     break;
             }
 

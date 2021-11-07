@@ -47,7 +47,7 @@ public class ControladorMantenimientoProducto implements ActionListener, ItemLis
 
     int id_actualizar = 0;
     int id_eliminar = 0;
-
+    
     private final Color colorErrrorFormularios = new Color(250, 177, 160);
 
     public ControladorMantenimientoProducto(PrincipalMantenimientoProducto principalMantenimientoProducto) {
@@ -76,16 +76,14 @@ public class ControladorMantenimientoProducto implements ActionListener, ItemLis
                 JOptionPane.showMessageDialog(null, "Producto no encontrado", "ERROR", 0);
             } else {
                 List<Producto> lista = null;
-
+                
                 if (headerListadoProducto.getTipoBusqueda().getSelectedItem().equals("id_producto")
                         || headerListadoProducto.getTipoBusqueda().getSelectedItem().equals("stock")) {
                     try {
                         Integer number = Integer.parseInt(headerListadoProducto.getCampo().getText());
                         tablaProducto.limpiarTabla();
                         lista = productoDAO.filtar(headerListadoProducto.getTipoBusqueda().getSelectedItem().toString(), String.valueOf(number));
-                    } catch (NumberFormatException e) {
-
-                    }
+                    } catch (NumberFormatException e) {}
                 } else if (headerListadoProducto.getTipoBusqueda().getSelectedItem().equals("precio")) {
                     try {
                         double number = Double.parseDouble(headerListadoProducto.getCampo().getText());
@@ -346,8 +344,7 @@ public class ControladorMantenimientoProducto implements ActionListener, ItemLis
     }
 
     @Override
-    public void itemStateChanged(ItemEvent ie
-    ) {
+    public void itemStateChanged(ItemEvent ie) {
         llenarTabla();
         if (ie.getSource() == piePaginaListadoProducto.getComboNRegistros()) {
             piePaginaListadoProducto.paginar();

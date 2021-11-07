@@ -49,7 +49,6 @@ public class ProductoDAO implements IProducto {
 
     @Override
     public List<Producto> filtar(String tipo, String busqueda) {
-        System.out.println(busqueda);
         List<Producto> lista = (List<Producto>) ((List<?>)leer.filtrar(tipo, busqueda, "productos"));
         
         return lista;

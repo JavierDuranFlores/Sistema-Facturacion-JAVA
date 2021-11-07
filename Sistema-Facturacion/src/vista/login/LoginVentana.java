@@ -33,31 +33,31 @@ public class LoginVentana {
     private JPanel panel;
 
     private GridBagLayout gbl;
-    protected GridBagConstraints constraints;
+    private GridBagConstraints constraints;
 
-    protected JPanel panelLoginRegistro;
+    private JPanel panelLoginRegistro;
 
-    protected JLabel etiquetaTitulo;
+    private JLabel etiquetaTitulo;
 
-    protected JLabel etiquetaImagenUsername;
-    protected JPanel panelUsername;
+    private JLabel etiquetaImagenUsername;
+    private JPanel panelUsername;
 
-    protected JLabel etiquetaImagenPassword;
-    protected JPanel panelPassword;
+    private JLabel etiquetaImagenPassword;
+    private JPanel panelPassword;
 
-    protected RedondearTextField campoUsername;
-    protected RedondearPasswordField campoPassword;
+    private RedondearTextField campoUsername;
+    private RedondearPasswordField campoPassword;
 
-    protected JPanel panelAyuda;
-    protected RedondearBoton botonContraseñaOlvidada;
-    protected RedondearBoton botonCrearCuenta;
+    private JPanel panelAyuda;
+    private RedondearBoton botonContraseñaOlvidada;
+    private RedondearBoton botonCrearCuenta;
 
-    protected JPanel panelBotonLogin;
-    protected RedondearBoton botonLogin;
+    private JPanel panelBotonLogin;
+    private RedondearBoton botonLogin;
 
-    protected ControladorLogin controladorLogin;
+    private ControladorLogin controladorLogin;
 
-    protected JRadioButton mostrarContra;
+    private JRadioButton mostrarContra;
 
     private final Color colorLogin = new Color(0, 98, 102);
     

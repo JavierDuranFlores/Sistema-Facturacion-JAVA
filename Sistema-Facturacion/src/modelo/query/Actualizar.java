@@ -54,6 +54,26 @@ public class Actualizar {
 
                 JOptionPane.showMessageDialog(null, "PRODUCTO ACTUALIZADO");
             }
+            
+            if (datos[0].equalsIgnoreCase("facturas")) {
+                ps = CON.conectar().prepareStatement("SELECT actualizar_facturas(?, ?, ?, ?);");
+                ps.setString(1, datos[1]);
+                ps.setString(2, datos[2]);
+                ps.setString(3, datos[3]);
+                ps.setString(4, datos[4]);
+                ps.execute();
+
+                JOptionPane.showMessageDialog(null, "FACTURA ACTUALIZADA");
+            }
+            
+            if (datos[0].equalsIgnoreCase("facturas_items")) {
+                ps = CON.conectar().prepareStatement("SELECT actualizar_facturas_items(?, ?, ?, ?);");
+                ps.setString(1, datos[1]);
+                ps.setString(2, datos[2]);
+                ps.setString(3, datos[3]);
+                ps.setString(4, datos[4]);
+                ps.execute();
+            }
 
         } catch (SQLException ex) {
             if (datos[0].equalsIgnoreCase("clientes")) {
@@ -62,6 +82,10 @@ public class Actualizar {
             
             if (datos[0].equalsIgnoreCase("productos")) {
                 JOptionPane.showMessageDialog(null, "PRODUCTO NO ACTUALIZADO", "ERROR", 0);
+            }
+            
+            if (datos[0].equalsIgnoreCase("facturas")) {
+                JOptionPane.showMessageDialog(null, "FACTURA NO ACTUALIZADA", "ERROR", 0);
             }
             
             System.out.println(ex.getMessage());
