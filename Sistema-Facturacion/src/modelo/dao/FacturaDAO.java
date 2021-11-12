@@ -53,7 +53,7 @@ public class FacturaDAO implements IFactura {
 
     @Override
     public Factura filtar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return (Factura) leer.filtrar(id, "facturas");
     }
 
     @Override
@@ -80,6 +80,18 @@ public class FacturaDAO implements IFactura {
 
     public Leer getLeer() {
         return leer;
+    }
+
+    @Override
+    public List<Factura> filtarFechaCreado(String fi, String ff) {
+        return (List<Factura>) ((List <?>) leer.filtarByDate(fi, ff, "facturas"));
+    }
+
+    @Override
+    public List<Factura> paginarByCliente(String limite, String pagina, String idCliente) {
+        List<Factura> lista = (List<Factura>) ((List<?>) leer.paginarFacturaByCliente(limite, pagina, idCliente));
+
+        return lista;
     }
 
 }

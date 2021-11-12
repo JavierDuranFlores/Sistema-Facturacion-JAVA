@@ -6,6 +6,7 @@
 package vista.inicio;
 
 import controlador.ControladorInicio;
+import controlador.consultas.clientes.ControladorConsultaClientes;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -147,6 +148,11 @@ public class Inicio {
         consultas.add(productoConsultas);
         consultas.add(facturaConsultas);
         
+        clienteConsultas.addActionListener(controladorInicio);
+        productoConsultas.addActionListener(controladorInicio);
+        facturaFecha.addActionListener(controladorInicio);
+        facturaID.addActionListener(controladorInicio);
+        
         barraMenu.add(consultas);
     }
     
@@ -203,9 +209,23 @@ public class Inicio {
         return clienteConsultas;
     }
 
+    public JMenuItem getProductoConsultas() {
+        return productoConsultas;
+    }
+    
     public JMenuItem getFacturaConsultas() {
         return facturaConsultas;
     }
+
+    public JMenuItem getFacturaFecha() {
+        return facturaFecha;
+    }
+
+    public JMenuItem getFacturaID() {
+        return facturaID;
+    }
+    
+    
 
     public JMenuItem getClienteMantenimiento() {
         return clienteMantenimiento;

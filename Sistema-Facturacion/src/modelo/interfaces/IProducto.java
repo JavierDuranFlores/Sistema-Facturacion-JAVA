@@ -19,6 +19,8 @@ public interface IProducto {
     
     public Producto filtar(int id);
     
+    public List<Producto> filtarFechaCreado(String fi, String ff);
+    
     public List<Producto> paginar(String limite, String pagina);
     
     public void ingresar(String nombre, String precio, String stock);

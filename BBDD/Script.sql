@@ -419,11 +419,11 @@ $BODY$
         IF tipo = 'id_cliente' THEN
             RETURN QUERY SELECT * FROM clientes WHERE id_cliente = busqueda::SMALLINT;
         ELSIF tipo = 'nombre'THEN
-            RETURN QUERY SELECT * FROM clientes WHERE nombre = busqueda;
+            RETURN QUERY SELECT * FROM clientes WHERE nombre ILIKE busqueda;
         ELSIF tipo = 'apellidop'THEN
-            RETURN QUERY SELECT * FROM clientes WHERE apellidop = busqueda;
+            RETURN QUERY SELECT * FROM clientes WHERE apellidop ILIKE busqueda;
         ELSIF tipo = 'apellidom'THEN
-            RETURN QUERY SELECT * FROM clientes WHERE apellidom = busqueda;
+            RETURN QUERY SELECT * FROM clientes WHERE apellidom ILIKE busqueda;
         ELSIF tipo = 'edad'THEN
             RETURN QUERY SELECT * FROM clientes WHERE edad = busqueda::INT;
         ELSIF tipo = 'email'THEN
@@ -642,6 +642,23 @@ LANGUAGE plpgsql;
 
 SELECT eliminar_cliente(4);
 
+-- FUNCION QUE FILTRA A CLIENTE POR LA FECHA 
+
+CREATE OR REPLACE FUNCTION filtar_clientes_creatAT(CHARACTER VARYING, CHARACTER VARYING)
+RETURNS SETOF clientes
+AS
+$BODY$
+
+    SELECT * FROM clientes WHERE create_at BETWEEN $1::DATE AND $2::DATE;
+
+
+$BODY$
+LANGUAGE sql;
+
+
+SELECT * FROM filtar_clientes_creatAT('2021-09-1', '2021-09-13');
+
+SELECT * FROM clientes WHERE create_at BETWEEN '2021-09-1' AND '2021-09-13';
 
 --          PRODUCTOS
 ------
@@ -694,7 +711,7 @@ $BODY$
         IF tipo = 'id_producto' THEN
             RETURN QUERY SELECT * FROM productos WHERE id_producto = busqueda::SMALLINT;
         ELSIF tipo = 'nombre'THEN
-            RETURN QUERY SELECT * FROM productos WHERE nombre = busqueda;
+            RETURN QUERY SELECT * FROM productos WHERE nombre ILIKE busqueda;
         ELSIF tipo = 'precio'THEN
             RETURN QUERY SELECT * FROM productos WHERE precio = busqueda::NUMERIC;
         ELSIF tipo = 'stock'THEN
@@ -705,6 +722,43 @@ $BODY$
     END;
 $BODY$
 LANGUAGE 'plpgsql';
+
+SELECT * FROM filtrar_productos('nombre', 'arroz');
+
+-- FUNCION PRODUCTOS CLIENTES
+CREATE OR REPLACE FUNCTION filtrar_productos_factura(CHARACTER VARYING)
+RETURNS SETOF productos
+AS
+$BODY$
+    BEGIN
+        RETURN QUERY SELECT p.id_producto, p.nombre, p.precio, p.stock, p.create_at
+        FROM productos AS p
+        INNER JOIN facturas_items AS fi
+        ON p.id_producto = fi.id_producto
+        INNER JOIN facturas AS f
+        ON f.id_factura = fi.id_factura
+        INNER JOIN clientes AS c
+        ON c.id_cliente = f.id_cliente
+        WHERE f.id_factura = $1::SMALLINT;
+    END;
+$BODY$
+LANGUAGE plpgsql;
+
+
+SELECT * FROM filtrar_productos_factura('36');
+-- FUNCION QUE FILTRA PRODUCTOS POR FECHA CREADO
+CREATE OR REPLACE FUNCTION filtar_productos_creatAT(CHARACTER VARYING, CHARACTER VARYING)
+RETURNS SETOF productos
+AS
+$BODY$
+
+    SELECT * FROM productos WHERE create_at BETWEEN $1::DATE AND $2::DATE;
+
+
+$BODY$
+LANGUAGE sql;
+
+SELECT * FROM filtar_productos_creatAT('2021-10-24', '2021-10-25');
 
 SELECT * FROM filtrar_clientes ('id_cliente', '1');
 
@@ -785,6 +839,29 @@ $BODY$
 LANGUAGE plpgsql;
 
 SELECT * FROM consulta_paginada_facturas('10', '1');
+
+-- PAGINAR FACTURAS POR IDCLIENTE
+
+CREATE OR REPLACE FUNCTION consulta_paginada_facturas_byIdCliente(_limite CHARACTER VARYING, _pagina CHARACTER VARYING, _id_cliente CHARACTER VARYING)
+RETURNS SETOF facturas AS
+$BODY$
+    DECLARE
+        inicio INT;
+    BEGIN
+        inicio = _limite::INT * _pagina::INT - _limite::INT;
+        RETURN QUERY SELECT id_factura, n_productos, total, id_cliente, create_at
+                     FROM facturas WHERE id_cliente = _id_cliente::SMALLINT ORDER BY id_factura
+                     LIMIT _limite::INT OFFSET inicio::INT;
+
+    END;
+$BODY$
+LANGUAGE plpgsql;
+
+SELECT * FROM consulta_paginada_facturas_byIdCliente('4', '1', '2');
+
+SELECT id_factura, n_productos, total, id_cliente, create_at
+                     FROM facturas WHERE id_cliente = 2 ORDER BY id_factura
+                     LIMIT 4 OFFSET 0;
 
 ------ FACTURAS
 
@@ -876,10 +953,50 @@ $BODY$
 $BODY$
 LANGUAGE plpgsql;
 
+CREATE OR REPLACE FUNCTION leer_facturas_items_clientes(CHARACTER VARYING, CHARACTER VARYING)
+RETURNS TABLE (idf SMALLINT,  idc SMALLINT, idfi SMALLINT, idp SMALLINT) AS
+$BODY$
 
-SELECT * FROM leer_facturas_items();
+    BEGIN
 
-CREATE OR REPLACE FUNCTION filtrar_facturas_items(CHARACTER VARYING)
+        RETURN QUERY SELECT f.id_factura,
+               f.id_cliente,
+               fi.id_factura_item,
+               p.id_producto
+        FROM facturas AS f
+        INNER JOIN facturas_items AS fi
+        ON f.id_factura = fi.id_factura
+        INNER JOIN productos AS p
+        ON fi.id_producto = p.id_producto
+        INNER JOIN clientes AS c
+        ON c.id_cliente = f.id_cliente
+        WHERE f.id_cliente = $1::SMALLINT
+        AND
+            f.id_factura = $2::SMALLINT;
+
+    END;
+
+$BODY$
+LANGUAGE plpgsql;
+
+/*
+f.n_productos,
+               f.total,
+f.create_at,
+fi.cantidad,
+c.nombre,
+               c.apellidop,
+               c.apellidom,
+               c.edad,
+               p.nombre,
+               p.precio,
+               p.stock,
+               p.create_at
+*/
+
+SELECT * FROM leer_facturas_items_clientes('2', '36');
+
+CREATE OR REPLACE FUNCTION filtrar_facturas_items_ByIdFactura(CHARACTER VARYING)
 RETURNS TABLE (idf SMALLINT, np SMALLINT , totalf NUMERIC,  idc SMALLINT, caf DATE, idfi SMALLINT, cantidadfi INT, idp SMALLINT, nombrep CHARACTER VARYING, preciop NUMERIC(12, 2), stockp INT, cap DATE) AS
 $BODY$
 
@@ -908,7 +1025,21 @@ $BODY$
 $BODY$
 LANGUAGE plpgsql;
 
-SELECT * FROM filtrar_facturas_items('9');
+    SELECT * FROM filtrar_facturas_items('36');
+
+-- FILTAR FACTURAS ITEMS
+CREATE OR REPLACE FUNCTION filtrar_facturas_items (id INT)
+RETURNS SETOF facturas_items
+AS
+$BODY$
+    BEGIN
+        RETURN QUERY SELECT * FROM facturas_items WHERE id_factura_item = id::SMALLINT;
+    END;
+$BODY$
+LANGUAGE 'plpgsql';
+
+SELECT * FROM filtrar_facturas_items(189);
+
 
 CREATE OR REPLACE FUNCTION eliminar_factura(INT)
 RETURNS VOID AS
@@ -996,3 +1127,43 @@ $BODY$
 
 $BODY$
 LANGUAGE plpgsql;
+
+-- FILTAR FACTURAS POR FECHA DE CREADA
+CREATE OR REPLACE FUNCTION filtar_facturas_creatAT(CHARACTER VARYING, CHARACTER VARYING)
+RETURNS SETOF facturas
+AS
+$BODY$
+
+    SELECT * FROM facturas WHERE create_at BETWEEN $1::DATE AND $2::DATE;
+
+
+$BODY$
+LANGUAGE sql;
+
+SELECT * FROM filtar_facturas_creatAT('2021-10-24', '2021-10-24');
+
+-- FILTRAR FACTURAS ID
+
+CREATE OR REPLACE FUNCTION filtrar_facturas_byCliente (id INT)
+RETURNS SETOF facturas
+AS
+$BODY$
+    BEGIN
+        RETURN QUERY SELECT * FROM facturas WHERE id_cliente = id::SMALLINT;
+    END;
+$BODY$
+LANGUAGE 'plpgsql';
+
+SELECT * FROM filtrar_facturas_byCliente (2);
+
+CREATE OR REPLACE FUNCTION filtrar_facturas (id INT)
+RETURNS SETOF facturas
+AS
+$BODY$
+    BEGIN
+        RETURN QUERY SELECT * FROM facturas WHERE id_factura = id::SMALLINT;
+    END;
+$BODY$
+LANGUAGE 'plpgsql';
+
+SELECT * FROM filtrar_facturas (2);

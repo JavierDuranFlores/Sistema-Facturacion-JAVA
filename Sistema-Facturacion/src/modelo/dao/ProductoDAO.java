@@ -86,5 +86,10 @@ public class ProductoDAO implements IProducto {
     public Leer getLeer() {
         return leer;
     }
+
+    @Override
+    public List<Producto> filtarFechaCreado(String fi, String ff) {
+        return (List<Producto>) ((List <?>) leer.filtarByDate(fi, ff, "productos"));
+    }
     
 }

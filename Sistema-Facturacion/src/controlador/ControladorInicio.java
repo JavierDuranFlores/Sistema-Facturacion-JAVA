@@ -7,6 +7,10 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import vista.consultas.clientes.PrincipalConsultaCliente;
+import vista.consultas.facturas.PrincipalConsultaFacturaFecha;
+import vista.consultas.facturas.PrincipalConsultaFacturaId;
+import vista.consultas.productos.PrincipalConsultaProducto;
 import vista.crud.cliente.PrincipalMantenimientoCliente;
 import vista.crud.factura.PrincipalMantenimientoFactura;
 import vista.crud.producto.PrincipalMantenimientoProducto;
@@ -23,11 +27,21 @@ public class ControladorInicio implements ActionListener{
     private final PrincipalMantenimientoProducto principalMantenimientoProducto;
     private final PrincipalMantenimientoFactura principalMantenimientoFactura;
     
+    private final PrincipalConsultaCliente principalConsultaCliente;
+    private final PrincipalConsultaProducto principalConsultaProducto;
+    private final PrincipalConsultaFacturaFecha principalConsultaFacturaFecha;
+    private final PrincipalConsultaFacturaId principalConsultaFacturaId;
+    
     public ControladorInicio(Inicio inicio) {
         this.inicio = inicio;
         principalMantenimientoCliente = new PrincipalMantenimientoCliente();
         principalMantenimientoProducto = new PrincipalMantenimientoProducto();
         principalMantenimientoFactura = PrincipalMantenimientoFactura.getInstance();
+        
+        principalConsultaCliente = new PrincipalConsultaCliente();
+        principalConsultaProducto = new PrincipalConsultaProducto();
+        principalConsultaFacturaFecha = new PrincipalConsultaFacturaFecha();
+        principalConsultaFacturaId = new PrincipalConsultaFacturaId();
     }
     
     @Override
@@ -39,6 +53,14 @@ public class ControladorInicio implements ActionListener{
             inicio.addContenedor(principalMantenimientoProducto);
         } else if (ae.getSource() == inicio.getFacturaMantenimiento()) {
             inicio.addContenedor(principalMantenimientoFactura);
+        } else if (ae.getSource() == inicio.getClienteConsultas()) {
+            inicio.addContenedor(principalConsultaCliente);
+        } else if (ae.getSource() == inicio.getProductoConsultas()) {
+            inicio.addContenedor(principalConsultaProducto);
+        } else if (ae.getSource() == inicio.getFacturaFecha()) {
+            inicio.addContenedor(principalConsultaFacturaFecha);
+        } else if (ae.getSource() == inicio.getFacturaID()) {
+            inicio.addContenedor(principalConsultaFacturaId);
         }
         
     }

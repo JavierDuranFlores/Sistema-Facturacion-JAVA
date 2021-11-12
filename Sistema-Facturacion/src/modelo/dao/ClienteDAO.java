@@ -6,6 +6,7 @@
 package modelo.dao;
 
 import java.sql.Array;
+import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -97,6 +98,11 @@ public class ClienteDAO implements ICliente{
     @Override
     public void eliminar(int id) {
         eliminar.eliminar("clientes", id);
+    }
+
+    @Override
+    public List<Cliente> filtarFechaCreado(String fi, String ff) {
+        return (List<Cliente>) ((List <?>) leer.filtarByDate(fi, ff, "clientes"));
     }
     
 }

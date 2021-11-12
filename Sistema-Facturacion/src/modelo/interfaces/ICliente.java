@@ -5,6 +5,7 @@
  */
 package modelo.interfaces;
 
+import java.util.Date;
 import java.util.List;
 import modelo.entidades.Cliente;
 
@@ -19,6 +20,8 @@ public interface ICliente {
     public List<Cliente> filtar(String tipo,String busqueda);
     
     public Cliente filtar(int id);
+    
+    public List<Cliente> filtarFechaCreado(String fi, String ff);
     
     public List<Cliente> paginar(String limite, String pagina);
     

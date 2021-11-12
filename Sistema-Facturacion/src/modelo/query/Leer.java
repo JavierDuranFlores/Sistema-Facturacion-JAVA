@@ -5,6 +5,7 @@
  */
 package modelo.query;
 
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +17,7 @@ import modelo.entidades.Cliente;
 import modelo.entidades.Factura;
 import modelo.entidades.FacturaItem;
 import modelo.entidades.Producto;
+import modelo.entidades.Reporte;
 
 /**
  *
@@ -163,6 +165,21 @@ public class Leer {
                     lista.add(producto);
 
                 }
+            } else if (tabla.equals("productosFactura")) {
+                ps = CON.conectar().prepareStatement("SELECT * FROM filtrar_productos_factura (?);");
+                ps.setString(1, busqueda);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    Producto producto = new Producto(rs.getShort(1),
+                            rs.getString(2),
+                            rs.getDouble(3),
+                            rs.getInt(4),
+                            rs.getDate(5));
+
+                    lista.add(producto);
+
+                }
             } else if (tabla.equals("facturas")) {
                 ps = CON.conectar().prepareStatement("SELECT * FROM filtrar_facturas (?, ?);");
                 ps.setString(1, tipo);
@@ -180,10 +197,9 @@ public class Leer {
 
                 }
             } else if (tabla.equals("facturas_items")) {
-                ps = CON.conectar().prepareStatement("SELECT * FROM filtrar_facturas_items(?);");
+                ps = CON.conectar().prepareStatement("SELECT * FROM filtrar_facturas_items_ByIdFactura(?);");
                 ps.setString(1, busqueda);
                 rs = ps.executeQuery();
-                int idf = 0;
                 while (rs.next()) {
 
                     /* idfi | cantidadfi */
@@ -255,7 +271,33 @@ public class Leer {
                             rs.getDate(5));
 
                 }
-            } 
+            } else if (tabla.equals("facturasId")) {
+                ps = CON.conectar().prepareStatement("SELECT * FROM filtrar_facturas (?);");
+                ps.setInt(1, id);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    objeto = new Factura(rs.getShort(1),
+                            rs.getShort(2),
+                            rs.getDouble(3),
+                            rs.getShort(4),
+                            rs.getDate(5));
+
+                }
+            } else if (tabla.equals("facturas_items")) {
+                ps = CON.conectar().prepareStatement("SELECT * FROM filtrar_facturas (?);");
+                ps.setInt(1, id);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    objeto = new Factura(rs.getShort(1),
+                            rs.getShort(2),
+                            rs.getDouble(3),
+                            rs.getShort(4),
+                            rs.getDate(5));
+
+                }
+            }
 
             CON.desconectar();
         } catch (SQLException e) {
@@ -329,6 +371,34 @@ public class Leer {
 
         return lista;
     }
+    
+    public List<Object> paginarFacturaByCliente(String limite, String pagina, String idCliente) {
+        List<Object> lista = new ArrayList<>();
+        try{
+        ps = CON.conectar().prepareStatement("SELECT * FROM consulta_paginada_facturas_byIdCliente (?, ?, ?);");
+                ps.setString(1, limite);
+                ps.setString(2, pagina);
+                ps.setString(3, idCliente);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    Factura factura = new Factura(rs.getShort(1),
+                            rs.getShort(2),
+                            rs.getDouble(3),
+                            rs.getShort(4),
+                            rs.getDate(5));
+
+                    lista.add(factura);
+                }
+            
+            CON.desconectar();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            e.printStackTrace(System.out);
+        }
+
+        return lista;
+    }
 
     public int numeroRegistrosTabla(String tabla) {
 
@@ -385,8 +455,135 @@ public class Leer {
         return paginas;
     }
 
+    public int numeroRegistrosTablaFacturaByCliente(String idCliente) {
+
+        int registros = 0;
+
+        try {
+            ps = CON.conectar().prepareStatement("SELECT COUNT(*) FROM filtrar_facturas_byCliente ('?');");
+            ps.setString(1, idCliente);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                registros = rs.getInt(1);
+            }
+            CON.desconectar();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+        return registros;
+    }
+
+    public Object[] paginasByIdCliente(int limite, String idCliente) {
+        int pagina = numeroRegistrosTablaFacturaByCliente(idCliente) / limite;
+        int mod = numeroRegistrosTablaFacturaByCliente(idCliente) % limite;
+        if (mod != 0) {
+            pagina = pagina + 1;
+        }
+
+        paginas = new Object[pagina];
+        for (int i = 0; i < paginas.length; i++) {
+            paginas[i] = i + 1;
+        }
+
+        return paginas;
+    }
+
     public Object[] getPaginas() {
         return paginas;
+    }
+
+    public List<Object> filtarByDate(String fi, String ff, String tabla) {
+        List<Object> lista = new ArrayList<>();
+        try {
+            if (tabla.equalsIgnoreCase("clientes")) {
+                ps = CON.conectar().prepareStatement("SELECT * FROM filtar_clientes_creatAT(?, ?);");
+
+                ps.setString(1, fi);
+                ps.setString(2, ff);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    Cliente cliente = new Cliente(rs.getShort(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            rs.getInt(5),
+                            rs.getString(6),
+                            rs.getString(7),
+                            rs.getString(8),
+                            rs.getDate(9));
+                    lista.add(cliente);
+                }
+            } else if (tabla.equalsIgnoreCase("productos")) {
+                ps = CON.conectar().prepareStatement("SELECT * FROM filtar_productos_creatAT(?, ?);");
+
+                ps.setString(1, fi);
+                ps.setString(2, ff);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    Producto producto = new Producto(rs.getShort(1),
+                            rs.getString(2),
+                            rs.getDouble(3),
+                            rs.getInt(4),
+                            rs.getDate(5));
+
+                    lista.add(producto);
+                }
+
+            }
+            if (tabla.equalsIgnoreCase("facturas")) {
+                ps = CON.conectar().prepareStatement("SELECT * FROM filtar_facturas_creatAT(?, ?);");
+
+                ps.setString(1, fi);
+                ps.setString(2, ff);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    Factura factura = new Factura(rs.getShort(1),
+                            rs.getShort(2),
+                            rs.getDouble(3),
+                            rs.getShort(4),
+                            rs.getDate(5));
+
+                    lista.add(factura);
+                }
+            }
+
+        } catch (SQLException e) {
+        }
+
+        return lista;
+    }
+
+    public List<Reporte> reporte(String idCliente, String idFactura) {
+
+        List<Reporte> lista = new ArrayList<>();
+
+        try {
+            ps = CON.conectar().prepareStatement("SELECT * FROM leer_facturas_items_clientes(?, ?);");
+
+            ps.setString(1, idCliente);
+            ps.setString(2, idFactura);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String idFacturaItem = String.valueOf(rs.getShort(3));
+                String idProducto = String.valueOf(rs.getShort(4));
+                Factura factura = (Factura) this.filtrar(Integer.valueOf(idFactura), "facturasId");
+                Cliente cliente = (Cliente) this.filtrar(Integer.valueOf(idCliente), "clientes");
+                List<FacturaItem> facturaItem = (List<FacturaItem>) ((List< ?>) this.filtrar("", idFactura, "facturas_items"));
+                List<Producto> listaProductos = (List<Producto>) ((List< ?>) this.filtrar("", idFactura, "productosFactura"));
+                Reporte reporte = new Reporte(factura, cliente, facturaItem, listaProductos);
+
+                lista.add(reporte);
+            }
+        } catch (Exception e) {
+        }
+
+        return lista;
     }
 
 }

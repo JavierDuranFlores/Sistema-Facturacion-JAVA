@@ -57,8 +57,11 @@ public class FacturaItem {
     public void setProductos    (List<Producto> productos) {
         this.productos = productos;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "FacturaItem{" + "idFacturaItem=" + idFacturaItem + ", cantidad=" + cantidad + ", facturas=" + facturas + ", productos=" + productos + '}';
+    }
     
     
 }
