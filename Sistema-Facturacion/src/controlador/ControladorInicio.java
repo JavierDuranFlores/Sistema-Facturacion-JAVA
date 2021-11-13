@@ -7,6 +7,7 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import vista.reporte.Reporte;
 import vista.consultas.clientes.PrincipalConsultaCliente;
 import vista.consultas.facturas.PrincipalConsultaFacturaFecha;
 import vista.consultas.facturas.PrincipalConsultaFacturaId;
@@ -31,6 +32,8 @@ public class ControladorInicio implements ActionListener{
     private final PrincipalConsultaProducto principalConsultaProducto;
     private final PrincipalConsultaFacturaFecha principalConsultaFacturaFecha;
     private final PrincipalConsultaFacturaId principalConsultaFacturaId;
+    
+    private Reporte reporte;
     
     public ControladorInicio(Inicio inicio) {
         this.inicio = inicio;
@@ -61,6 +64,8 @@ public class ControladorInicio implements ActionListener{
             inicio.addContenedor(principalConsultaFacturaFecha);
         } else if (ae.getSource() == inicio.getFacturaID()) {
             inicio.addContenedor(principalConsultaFacturaId);
+        } else if (ae.getSource() == inicio.getReporte()) {
+            reporte = new Reporte();
         }
         
     }

@@ -44,7 +44,6 @@ public class Inicio {
                       clienteConsultas,
                       productoConsultas,
                       reporte,
-                      calculadora,
                       cambiarContra,
                       salirItem;
     
@@ -165,6 +164,8 @@ public class Inicio {
         
         reportes.add(reporte);
         
+        reporte.addActionListener(controladorInicio);
+        
         barraMenu.add(reportes);
     }
     
@@ -172,13 +173,9 @@ public class Inicio {
         herramientas = new JMenu("HERRAMIENTAS");
         herramientas.setIcon(new ImageIcon("src//img//herramientas.png"));
         
-        calculadora = new JMenuItem("CALCULADORA");
-        calculadora.setIcon(new ImageIcon("src//img//calculadora.png"));
-        
         cambiarContra = new JMenuItem("CAMBIAR CONTRASEÑA");
         cambiarContra.setIcon(new ImageIcon("src//img//cambiar-contra.png"));
         
-        herramientas.add(calculadora);
         herramientas.add(cambiarContra);
         
         barraMenu.add(herramientas);
@@ -241,10 +238,6 @@ public class Inicio {
 
     public JMenuItem getReporte() {
         return reporte;
-    }
-
-    public JMenuItem getCalculadora() {
-        return calculadora;
     }
 
     public JMenuItem getCambiarContra() {
