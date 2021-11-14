@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import modelo.interfaces.LoginInterface;
 import modelo.query.VerificarLogin;
 import modelo.entidades.Usuario;
+import modelo.query.Actualizar;
+import modelo.query.Leer;
 
 /**
  *
@@ -17,9 +19,13 @@ import modelo.entidades.Usuario;
 public class UsuarioDAO implements LoginInterface {
 
     private VerificarLogin vl;
+    private Leer leer;
+    private Actualizar actualizar;
 
     public UsuarioDAO() {
         vl = new VerificarLogin();
+        leer = new Leer();
+        actualizar = new Actualizar();
     }
 
     @Override
@@ -29,6 +35,16 @@ public class UsuarioDAO implements LoginInterface {
 
         return rs;
 
+    }
+
+    @Override
+    public void actualizar(String contra, String idUsuario) {
+        actualizar.actualizar("usuarios", contra, idUsuario);
+    }
+
+    @Override
+    public int filtar(String usuario) {
+        return leer.filtarUsuario(usuario);
     }
 
 }

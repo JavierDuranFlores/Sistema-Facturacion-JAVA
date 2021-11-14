@@ -306,6 +306,23 @@ public class Leer {
 
         return objeto;
     }
+    
+    public int filtarUsuario(String usuario) {
+        int id = 0;
+        try {
+            
+            ps = CON.conectar().prepareStatement("SELECT * FROM filtrar_usuario (?);");
+                ps.setString(1, usuario);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    id = rs.getInt(1);
+                }
+            
+        } catch (Exception e) {
+        }
+        return id;
+    }
 
     public List<Object> paginar(String limite, String pagina, String tabla) {
         List<Object> lista = new ArrayList<>();

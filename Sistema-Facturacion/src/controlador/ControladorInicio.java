@@ -15,6 +15,7 @@ import vista.consultas.productos.PrincipalConsultaProducto;
 import vista.crud.cliente.PrincipalMantenimientoCliente;
 import vista.crud.factura.PrincipalMantenimientoFactura;
 import vista.crud.producto.PrincipalMantenimientoProducto;
+import vista.herramientas.cambiarcontra.PrincipalCambiarContrase;
 import vista.inicio.Inicio;
 
 /**
@@ -33,6 +34,8 @@ public class ControladorInicio implements ActionListener{
     private final PrincipalConsultaFacturaFecha principalConsultaFacturaFecha;
     private final PrincipalConsultaFacturaId principalConsultaFacturaId;
     
+    private final PrincipalCambiarContrase principalCambiarContrase;
+    
     private Reporte reporte;
     
     public ControladorInicio(Inicio inicio) {
@@ -45,6 +48,8 @@ public class ControladorInicio implements ActionListener{
         principalConsultaProducto = new PrincipalConsultaProducto();
         principalConsultaFacturaFecha = new PrincipalConsultaFacturaFecha();
         principalConsultaFacturaId = new PrincipalConsultaFacturaId();
+        
+        principalCambiarContrase = new PrincipalCambiarContrase();
     }
     
     @Override
@@ -66,6 +71,8 @@ public class ControladorInicio implements ActionListener{
             inicio.addContenedor(principalConsultaFacturaId);
         } else if (ae.getSource() == inicio.getReporte()) {
             reporte = new Reporte();
+        } else if (ae.getSource() == inicio.getCambiarContra()) {
+            inicio.addContenedor(principalCambiarContrase);
         }
         
     }

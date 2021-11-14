@@ -14,4 +14,8 @@ import modelo.entidades.Usuario;
  */
 public interface LoginInterface {
     public ResultSet verificar(Usuario usuario);
+    
+    public int filtar(String usuario);
+    
+    public void actualizar(String contra, String idUsuario);
 }

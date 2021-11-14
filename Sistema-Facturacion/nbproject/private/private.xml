@@ -3,26 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/controlador/consultas/Facturas/ControladorConsultaFacturas.java</file>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/vista/consultas/facturas/ContenidoConsultaFacturas.java</file>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/vista/consultas/facturas/PrincipalConsultaFacturaFecha.java</file>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/vista/consultas/facturas/PrincipalConsultaFacturaId.java</file>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/controlador/consultas/productos/ControladorConsultaProductos.java</file>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/vista/consultas/productos/ContenidoConsultaProducto.java</file>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/modelo/Conexion.java</file>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/main/Main.java</file>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/vista/inicio/Inicio.java</file>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/modelo/interfaces/IFactura.java</file>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/controlador/mantenimiento/ControladorMantenimientoFactura.java</file>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/vista/reporte/productos.jrxml</file>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/vista/consultas/facturas/TablaDetalleFactura.java</file>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/vista/consultas/clientes/ContenidoConsultaCliente.java</file>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/controlador/consultas/Facturas/tabla/ControladorConsultaFacturasTabla.java</file>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/modelo/dao/FacturaDAO.java</file>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/vista/reporte/Reporte.java</file>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/vista/consultas/facturas/DetallesFacturas.java</file>
             <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/controlador/ControladorInicio.java</file>
-            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/modelo/query/Leer.java</file>
+            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/vista/inicio/Inicio.java</file>
+            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/main/Main.java</file>
+            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/vista/herramientas/cambiarcontra/PrincipalCambiarContraseña.java</file>
+            <file>file:/home/javier/Escritorio/Universidad/Quinto%20Semestre/Calidad%20en%20los%20procesos%20de%20desarrollo%20de%20software/Sistema-Facturacion-JAVA/Sistema-Facturacion/src/vista/consultas/clientes/PrincipalConsultaCliente.java</file>
         </group>
     </open-files>
 </project-private>

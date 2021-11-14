@@ -74,6 +74,13 @@ public class Actualizar {
                 ps.setString(4, datos[4]);
                 ps.execute();
             }
+            
+            if (datos[0].equalsIgnoreCase("usuarios")) {
+                ps = CON.conectar().prepareStatement("SELECT actualizar_contra(?, ?);");
+                ps.setString(1, datos[1]);
+                ps.setString(2, datos[2]);
+                ps.execute();
+            }
 
         } catch (SQLException ex) {
             if (datos[0].equalsIgnoreCase("clientes")) {

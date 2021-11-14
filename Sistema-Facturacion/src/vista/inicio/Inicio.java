@@ -178,6 +178,8 @@ public class Inicio {
         
         herramientas.add(cambiarContra);
         
+        cambiarContra.addActionListener(controladorInicio);
+        
         barraMenu.add(herramientas);
     }
     
