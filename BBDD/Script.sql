@@ -1,4 +1,4 @@
-/*
+    /*
 
     NOMENCLATURA DE NOMBRE A LLAVES PRIMARIA
     pk_nombreTabla_atributo
@@ -243,7 +243,6 @@ INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Mermelada', 20,
 INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Harina de Maíz', 15, 15, NOW());
 
 --
-
 INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Harina de Trigo', 20, 5, NOW());
 INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Huevos', 50, 10, NOW());
 INSERT INTO productos (nombre, precio, stock, create_at) VALUES('Café Instantáneo 50g', 50, 6, NOW());
@@ -351,6 +350,43 @@ ON
 ON
     facturas_items.id_producto = productos.id_producto;
 
+-- RECUPERAR LA INFORMACION DEL USUARIO
+    SELECT usuarios.id, usuarios.usuario, encode(decrypt(usuarios.contra::bytea, 'llave', '3des'::text), 'escape'::text), pregunta_recuperacion.pregunta, respuesta_recuperacion.respuesta FROM usuarios 
+    INNER JOIN pregunta_recuperacion 
+    ON usuarios.id_pregunta = pregunta_recuperacion.id
+    INNER JOIN respuesta_recuperacion
+    ON usuarios.id = respuesta_recuperacion.id_usuario;
+
+-- FILTAR USUARIO
+CREATE OR REPLACE FUNCTION filtrar_usuario(CHARACTER VARYING)
+RETURNS INT
+AS
+$BODY$
+    DECLARE
+        _id INT;
+    BEGIN
+        SELECT id INTO _id FROM usuarios WHERE usuario = $1;
+        RETURN _id;
+    END;
+$BODY$
+LANGUAGE plpgsql;
+SELECT * FROM filtrar_usuario('Javier');
+
+-- ACTUALIZAR CONTRASEÑA
+CREATE OR REPLACE FUNCTION actualizar_contra(CHARACTER VARYING, CHARACTER VARYING)
+RETURNS VOID
+AS
+$BODY$
+    BEGIN
+        UPDATE usuarios SET contra = ENCRYPT($1::BYTEA, 'llave', '3des')::TEXT WHERE id=$2::SMALLINT;
+    END;
+$BODY$
+LANGUAGE plpgsql;
+
+SELECT * FROM actualizar_contra('Duran2001', '1');
+
+
+
 --   FUNCIONES
 --  FUNCION PARA OBTENER LA SUMA DE TODOS LOS PRODUCTOS DE LA FACTURA DEL CLIENTE
 
@@ -393,6 +429,8 @@ $BODY$
 LANGUAGE plpgsql;
 
 SELECT autenticacion ('Javier', 'Duran2001');
+
+SELECT usuarios.usuario, encode(decrypt(usuarios.contra::bytea, 'llave', '3des'::text), 'escape'::text) FROM usuarios;
 
 
 CREATE FUNCTION concatenar(text, text, text)
