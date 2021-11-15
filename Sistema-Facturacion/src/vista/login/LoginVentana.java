@@ -77,8 +77,6 @@ public class LoginVentana {
         panelBotonLogin();
         botonLogin();
         panelAyuda();
-        botonContraseñaOlvidada();
-        botonCrearCuenta();
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setVisible(true);
     }

@@ -192,6 +192,8 @@ public class Inicio {
         
         salir.add(salirItem);
         
+        salirItem.addActionListener(controladorInicio);
+        
         barraMenu.add(salir);
         
     }

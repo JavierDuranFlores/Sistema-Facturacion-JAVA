@@ -38,6 +38,8 @@ public class Reporte {
             
             JasperViewer view = new JasperViewer(jprint, false);
             
+            view.setTitle("- REPORTE FACTURA -");
+            
             view.setZoomRatio(.75f);
             
             view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);

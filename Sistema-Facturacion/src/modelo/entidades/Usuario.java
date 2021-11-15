@@ -14,24 +14,21 @@ public class Usuario {
     private short id;
     private String usuario;
     private String password;
-    private Short id_pregunta;
 
     public Usuario() {
         
     }
     
-    public Usuario(short id, String usuario, String password, Short id_pregunta) {
+    public Usuario(short id, String usuario, String password) {
         this.id = id;
         this.usuario = usuario;
         this.password = password;
-        this.id_pregunta = id_pregunta;
     }
     
     public Usuario(String usuario, String password) {
         this.id = 0;
         this.usuario = usuario;
         this.password = password;
-        this.id_pregunta = 0;
     }
     
     public short getId() {
@@ -58,17 +55,9 @@ public class Usuario {
         this.password = password;
     }
 
-    public Short getId_pregunta() {
-        return id_pregunta;
-    }
-
-    public void setId_pregunta(Short id_pregunta) {
-        this.id_pregunta = id_pregunta;
-    }
-
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nombreUsuario=" + usuario + ", password=" + password + ", id_pregunta=" + id_pregunta + '}';
+        return "Usuario{" + "id=" + id + ", nombreUsuario=" + usuario + ", password=" + password + '}';
     }
 
 }

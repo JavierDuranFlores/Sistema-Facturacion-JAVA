@@ -73,6 +73,8 @@ public class ControladorInicio implements ActionListener{
             reporte = new Reporte();
         } else if (ae.getSource() == inicio.getCambiarContra()) {
             inicio.addContenedor(principalCambiarContrase);
+        } else if (ae.getSource() == inicio.getSalirItem()) {
+            System.exit(0);
         }
         
     }
